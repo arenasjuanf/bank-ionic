@@ -11,13 +11,13 @@
     </div>
 
     <!-- Login form -->
-    <form class="list-form">
+    <form class="list-form" [formGroup]="formulario">
       <ion-item>
         <ion-label floating>
-          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          <ion-icon name="nroDocumento" item-start class="text-primary"></ion-icon>
           Usuario
         </ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input type="text" formControlName="documento"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -25,13 +25,13 @@
           <ion-icon name="lock" item-start class="text-primary"></ion-icon>
           Clave
         </ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" formControlName="clave"></ion-input>
       </ion-item>
     </form>
 
 
     <div>
-      <button ion-button icon-start block color="dark" tappable (click)="login()">
+      <button ion-button icon-start block color="dark" tappable [disabled]="!formulario.valid" (click)="login()">
         <ion-icon name="log-in"></ion-icon>
         INICIAR SESIÓN
       </button>
