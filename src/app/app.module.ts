@@ -23,6 +23,8 @@ import {RegisterPage} from "../pages/register/register";
 import {SearchLocationPage} from "../pages/search-location/search-location";
 import {TripDetailPage} from "../pages/trip-detail/trip-detail";
 import {TripsPage} from "../pages/trips/trips";
+import { DbService } from '../services/db.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // import services
 // end import services
@@ -52,6 +54,8 @@ import {TripsPage} from "../pages/trips/trips";
       scrollAssist: true,
       autoFocusAssist: false
     }),
+    FormsModule,
+    ReactiveFormsModule,
     IonicStorageModule.forRoot({
       name: '__ionic3_start_theme',
         driverOrder: ['indexeddb', 'sqlite', 'websql']
@@ -75,6 +79,7 @@ import {TripsPage} from "../pages/trips/trips";
     SplashScreen,
     Keyboard,
     ActivityService,
+    DbService,
     TripService,
     WeatherProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

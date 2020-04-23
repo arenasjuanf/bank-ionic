@@ -2,6 +2,8 @@ import {Component} from "@angular/core";
 import {NavController, AlertController, ToastController, MenuController} from "ionic-angular";
 import {HomePage} from "../home/home";
 import {RegisterPage} from "../register/register";
+import { DbService } from "../../services/db.service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'page-login',
@@ -9,9 +11,28 @@ import {RegisterPage} from "../register/register";
 })
 export class LoginPage {
 
-  constructor(public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController) {
+  constructor(public nav: NavController,
+    public forgotCtrl: AlertController, 
+    public menu: MenuController, 
+    public toastCtrl: ToastController,
+    private dbService: DbService,
+    private formBuilder: FormBuilder
+
+  ) {
+    this.initForm();
     this.menu.swipeEnable(false);
   }
+
+
+  private formulario: FormGroup;
+
+  initForm(){
+    this.formulario = this.formBuilder.group({
+      documento: ['', Validators.required],
+      clave: ['', Validators.required],
+    });
+  }
+
 
   // go to register page
   register() {
@@ -20,7 +41,17 @@ export class LoginPage {
 
   // login and go to home page
   login() {
-    this.nav.setRoot(HomePage);
+    const documento = () => this.formulario.get('documento').value;
+    const clave = () => this.formulario.get('clave').value;
+    console.log(clave)
+    this.dbService.iniciarSesion(documento,clave).subscribe(
+      result => {
+        console.log('result: ', result);
+      }, error => {
+        console.log('error: ', error);
+      }
+    )
+    //this.nav.setRoot(HomePage);
   }
 
   forgotPass() {

@@ -7,6 +7,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
+import { DbService } from "../services/db.service";
 
 export interface MenuItem {
     title: string;
@@ -29,7 +30,7 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public keyboard: Keyboard
+    public keyboard: Keyboard,
   ) {
     this.initializeApp();
 
