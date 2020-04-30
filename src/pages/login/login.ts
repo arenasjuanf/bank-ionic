@@ -41,17 +41,20 @@ export class LoginPage {
 
   // login and go to home page
   login() {
-    const documento = () => this.formulario.get('documento').value;
-    const clave = () => this.formulario.get('clave').value;
-    console.log(clave)
+    const documento = this.formulario.get('documento').value;
+    const clave = this.formulario.get('clave').value;
     this.dbService.iniciarSesion(documento,clave).subscribe(
       result => {
-        console.log('result: ', result);
+        if(result['success']){
+          localStorage.setItem('logged', 'true');
+          localStorage.setItem('datosUsuario', JSON.stringify(result));
+          this.nav.setRoot(HomePage);
+        }
       }, error => {
         console.log('error: ', error);
       }
     )
-    //this.nav.setRoot(HomePage);
+    //
   }
 
   forgotPass() {

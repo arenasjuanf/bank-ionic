@@ -8,6 +8,9 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { DbService } from "../services/db.service";
+import { CheckoutTripPage } from "../pages/checkout-trip/checkout-trip";
+import { TripsPage } from "../pages/trips/trips";
+import { TripDetailPage } from "../pages/trip-detail/trip-detail";
 
 export interface MenuItem {
     title: string;
@@ -35,7 +38,11 @@ export class MyApp {
     this.initializeApp();
 
     this.appMenuItems = [
-      {title: 'Home', component: HomePage, icon: 'home'},
+      //{title: 'Home', component: HomePage, icon: 'home'},
+      { title: 'Mis Cuentas', component: TripsPage, icon: 'card' },
+      { title: 'CheckoutTripPage', component: CheckoutTripPage, icon: 'card' },
+      { title: 'TripDetailPage', component: TripDetailPage, icon: 'card' },
+
       /* {title: 'Local Weather', component: LocalWeatherPage, icon: 'partly-sunny'} */
     ];
   }
@@ -60,7 +67,8 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    //this.nav.setRoot();
+    this.nav.push(page.component, {});
   }
 
   logout() {

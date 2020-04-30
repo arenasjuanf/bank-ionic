@@ -20,4 +20,18 @@ export class DbService {
         return this.http.get(this.construirRuta(credenciales));
     }
 
+    checkearSesion() {
+        if (localStorage.getItem('logged') && localStorage.getItem('datosUsuario')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    cerrarSesion() {
+        localStorage.setItem('logged', 'false');
+        localStorage.removeItem('datosUsuario');
+        //this.router.navigateByUrl('/login');
+    }
+
 }
