@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, LoadingController, ToastController} from "ionic-angular";
+import {NavController, LoadingController, ToastController, NavParams} from "ionic-angular";
 import {TripService} from "../../services/trip-service";
 import {HomePage} from "../home/home";
 
@@ -16,9 +16,17 @@ export class CheckoutTripPage {
   public date = new Date();
 
   public paymethods = 'creditcard';
+  data: any;
 
-  constructor(public nav: NavController, public tripService: TripService, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+  constructor(
+    public nav: NavController,
+    public tripService: TripService,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    private navParams: NavParams) {
     // set sample data
+    this.data = this.navParams.data;
+    console.log(this.data);
     this.trip = tripService.getItem(1);
   }
 

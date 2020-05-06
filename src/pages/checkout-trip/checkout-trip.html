@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Activity Checkout</ion-title>
+    <ion-title>{{data?.nombre}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,20 +11,15 @@
 <ion-content padding class="checkout-trip common-bg">
   <!--trip information-->
   <div class="trip-info card round">
-    <div class="trip-image border-bottom" [ngStyle]="{'background-image': 'url(' + trip.thumb + ')'}"></div>
+    <div class="trip-image border-bottom" [ngStyle]="{'background-image': 'url(' + 'assets/img/trip/thumb/trip_'+ data.imgNumber  +'.jpg' + ')'}"></div>
     <ion-grid padding>
       <ion-row>
         <ion-col width-66>
-          <h5 ion-text color="primary">{{ trip.name }}</h5>
+          <h5 ion-text color="primary">{{ data.nombre }}</h5>
           <div>
-            <span class="bold">{{ trip.sub_name }}</span>
+            <span class="bold">Id Cuenta</span>
             <br/>
-            <span ion-text color="dark">{{ adults }} Adults</span>
-          </div>
-          <div margin-top>
-            <span ion-text color="dark">{{ date | date: 'EEE, MMM dd' }}</span>
-            <br/>
-            <span ion-text>{{ trip.location }}</span>
+            <span ion-text color="dark">{{ data.id }}</span>
           </div>
           <div margin-top>
             <ion-icon name="checkmark" class="text-green" *ngIf="trip.free_cancellation"></ion-icon>
@@ -32,51 +27,12 @@
           </div>
         </ion-col>
         <ion-col col-4>
-          <span ion-text>Total with Tax</span>
-          <h5 ion-text color="primary" class="bold" no-margin>{{ trip.price_adult * adults | currency:'USD':true }}</h5>
+          <span ion-text>Saldo</span>
+          <h5 ion-text color="primary" class="bold" no-margin>{{ data.saldo }}</h5>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
-
-    <!--more info-->
-  <h5>Guest Details</h5>
-  <div class="card round" margin-top>
-
-    <ion-list no-margin>
-      <ion-item class="primary-bg">
-        <ion-avatar item-start>
-          <img src="assets/img/avatar.jpeg">
-        </ion-avatar>
-        <h2 ion-text class="text-white bold">João Firmino</h2>
-        <p ion-text class="text-secondary bold">User</p>
-      </ion-item>
-    </ion-list>
-
-    <div padding>
-      <h5 ion-text color="secondary">Other Guests</h5>
-
-      <ion-item no-padding>
-        <ion-label color="dark" stacked>Adult 1 Name:</ion-label>
-        <ion-input type="text" placeholder="Ex. Joe Doe" value=""></ion-input>
-      </ion-item>
-      <ion-item no-padding>
-        <ion-label color="dark" stacked>Child 1 Name:</ion-label>
-        <ion-input type="text" placeholder="Ex. Joe Doe" value=""></ion-input>
-      </ion-item>
-    </div>
-  </div>
-
-  <!--payment info-->
-  <h5>Payment Methods</h5>
-  <ion-segment color="secondary" [(ngModel)]="paymethods">
-    <ion-segment-button value="creditcard" >
-      Credit card
-    </ion-segment-button>
-    <ion-segment-button value="paypal">
-      PayPal
-    </ion-segment-button>
-  </ion-segment>
 
   <div class="card round" margin-top margin-bottom>
 

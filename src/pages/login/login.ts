@@ -16,7 +16,7 @@ export class LoginPage {
     public menu: MenuController, 
     public toastCtrl: ToastController,
     private dbService: DbService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
 
   ) {
     this.initForm();
@@ -49,6 +49,8 @@ export class LoginPage {
           localStorage.setItem('logged', 'true');
           localStorage.setItem('datosUsuario', JSON.stringify(result));
           this.nav.setRoot(HomePage);
+        }else{
+          this.datosIncorrectos();
         }
       }, error => {
         console.log('error: ', error);
@@ -59,15 +61,9 @@ export class LoginPage {
 
   forgotPass() {
     let forgot = this.forgotCtrl.create({
-      title: 'Forgot Password?',
+      title: 'Datos Incorrectos',
       message: "Enter you email address to send a reset link password.",
-      inputs: [
-        {
-          name: 'email',
-          placeholder: 'Email',
-          type: 'email'
-        },
-      ],
+
       buttons: [
         {
           text: 'Cancel',
@@ -88,6 +84,22 @@ export class LoginPage {
               showCloseButton: true
             });
             toast.present();
+          }
+        }
+      ]
+    });
+    forgot.present();
+  }
+
+  datosIncorrectos(){
+    let forgot = this.forgotCtrl.create({
+      title: 'Datos Incorrectos',
+      message: "Revisa tu usuario Y contraseña, en caso de que no los recuerdes debes comunicarte con un administrador",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            // nada
           }
         }
       ]

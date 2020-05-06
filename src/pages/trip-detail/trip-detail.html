@@ -3,7 +3,7 @@
 
   <ion-navbar  color="primary">
     <ion-title>
-      <span ion-text>{{ trip.name }} eee</span>
+      <span ion-text>{{ data.nombre }}</span>
     </ion-title>
   </ion-navbar>
 
@@ -13,8 +13,8 @@
 <ion-content class="common-bg">
   <!--slides-->
   <ion-slides class="to-top" pager>
-    <ion-slide *ngFor="let image of trip.images">
-      <img [src]="image" alt="">
+    <ion-slide>
+      <img [src]="'assets/img/trip/thumb/trip_'+ data.imgNumber  +'.jpg'" alt="">
     </ion-slide>
   </ion-slides>
 

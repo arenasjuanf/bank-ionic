@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {NavController} from "ionic-angular";
 import {TripService} from "../../services/trip-service";
 import {CheckoutTripPage} from "../checkout-trip/checkout-trip";
+import { NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-trip-detail',
@@ -14,9 +15,16 @@ export class TripDetailPage {
   public adults = 2;
   // number of children
   public children = 0;
+  data: NavParams;
 
-  constructor(public nav: NavController, public tripService: TripService) {
+  constructor(
+    public nav: NavController, 
+    public tripService: TripService,
+    private navParams: NavParams
+  ) {
     // set sample data
+    this.data = this.navParams.data;
+    console.log('data: ', this.data);
     this.trip = tripService.getItem(1);
   }
 

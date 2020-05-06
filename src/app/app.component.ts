@@ -34,6 +34,7 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public keyboard: Keyboard,
+    private service : DbService
   ) {
     this.initializeApp();
 
@@ -72,7 +73,9 @@ export class MyApp {
   }
 
   logout() {
-    this.nav.setRoot(LoginPage);
+    if(this.service.cerrarSesion()){
+      this.nav.setRoot(LoginPage);
+    }
   }
 
 }
