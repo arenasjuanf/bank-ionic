@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, AlertController, ToastController} from "ionic-angular";
+import {NavController, AlertController, ToastController, LoadingController} from "ionic-angular";
 import {TripService} from "../../services/trip-service";
 import {TripDetailPage} from "../trip-detail/trip-detail";
 import { DbService } from "../../services/db.service";
