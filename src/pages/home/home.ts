@@ -13,7 +13,7 @@ import {SettingsPage} from "../settings/settings";
 export class HomePage {
 
 
-  constructor(private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
+  constructor(public nav: NavController, public popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {

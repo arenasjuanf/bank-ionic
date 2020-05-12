@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, AlertController, ToastController, MenuController} from "ionic-angular";
+import {NavController, AlertController, ToastController, MenuController, LoadingController} from "ionic-angular";
 import {HomePage} from "../home/home";
 import {RegisterPage} from "../register/register";
 import { DbService } from "../../services/db.service";
@@ -17,6 +17,8 @@ export class LoginPage {
     public toastCtrl: ToastController,
     private dbService: DbService,
     private formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
+
 
   ) {
     this.initForm();
@@ -41,6 +43,12 @@ export class LoginPage {
 
   // login and go to home page
   login() {
+
+    let loader = this.loadingCtrl.create({
+      content: "Validando Datos"
+    });
+    loader.present();
+
     const documento = this.formulario.get('documento').value;
     const clave = this.formulario.get('clave').value;
     this.dbService.iniciarSesion(documento,clave).subscribe(
@@ -48,10 +56,12 @@ export class LoginPage {
         if(result['success']){
           localStorage.setItem('logged', 'true');
           localStorage.setItem('datosUsuario', JSON.stringify(result));
+          this.dbService.dataUser = JSON.parse(localStorage.getItem('datosUsuario'))['usuario'];
           this.nav.setRoot(HomePage);
         }else{
           this.datosIncorrectos();
         }
+        loader.dismiss();
       }, error => {
         console.log('error: ', error);
       }

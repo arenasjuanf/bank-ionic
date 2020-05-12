@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
-import {NavController, LoadingController, ToastController, NavParams} from "ionic-angular";
-import {TripService} from "../../services/trip-service";
-import {HomePage} from "../home/home";
+import {NavController, LoadingController, ToastController, NavParams, AlertController} from "ionic-angular";
+import { DbService } from "../../services/db.service";
+import { TripsPage } from "../trips/trips";
+
 
 @Component({
   selector: 'page-checkout-trip',
@@ -9,49 +10,65 @@ import {HomePage} from "../home/home";
 })
 export class CheckoutTripPage {
   // trip data
-  public trip: any;
   // number of adults
-  public adults = 2;
   // date
-  public date = new Date();
 
-  public paymethods = 'creditcard';
   data: any;
-
+  monto;
   constructor(
+    public modalCtrl: AlertController,
+    public dbService: DbService,
     public nav: NavController,
-    public tripService: TripService,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     private navParams: NavParams) {
     // set sample data
     this.data = this.navParams.data;
-    console.log(this.data);
-    this.trip = tripService.getItem(1);
   }
 
-  // process send button
-  send() {
-    // send booking info
-    let loader = this.loadingCtrl.create({
-      content: "Please wait..."
-    });
-    // show message
-    let toast = this.toastCtrl.create({
-      showCloseButton: true,
-      cssClass: 'profile-bg',
-      message: 'Book Activity Success!',
-      duration: 3000,
-      position: 'bottom'
-    });
 
+  generarCodigo (){
+
+    let loader = this.loadingCtrl.create({
+      content: "Espera Por Favor"
+    });
     loader.present();
 
-    setTimeout(() => {
-      loader.dismiss();
-      toast.present();
-      // back to home page
-      this.nav.setRoot(HomePage);
-    }, 3000)
+    const objCodigo = {
+      saldo: this.monto,
+      codigo: new Date().getTime(),
+      estado: 1,
+      fk_cuenta: this.data.id
+    }
+
+
+    this.dbService.crearCodigo(objCodigo).subscribe(
+      result => {
+        if(result['success']){
+          loader.dismiss();
+          this.modalCodigo(objCodigo);
+        }
+      },
+      error => {
+        console.log('error: ', error);
+      }
+    )
+  }
+
+  modalCodigo(datos) {
+    let modal = this.modalCtrl.create({
+      title: 'Código: ' + datos.codigo,
+      message: "Monto: "+ datos.saldo,
+      buttons: [
+        {
+          text: 'Cerrar',
+          handler: data => {
+            // nada
+            this.nav.setRoot(TripsPage);
+          }
+        }
+      ]
+    });
+    modal.present();
   }
 }

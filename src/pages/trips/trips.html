@@ -5,6 +5,7 @@
       <span ion-text>Cuentas</span>
     </ion-title>
   </ion-navbar>
+  
 
   <!--  -->
   <ion-toolbar padding color="light">
@@ -16,6 +17,11 @@
 </ion-header>
 
 <ion-content padding class="trips detail-bg">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <!--list of trips-->
   <div class="trip card" *ngFor="let cuenta of cuentas" tappable (click)="entrarACuenta(cuenta)" margin-bottom>
     <div class="background border-bottom" [ngStyle]="{'background-image': 'url(' + 'assets/img/trip/thumb/trip_'+ cuenta.imgNumber  +'.jpg' + ')'}">
@@ -32,4 +38,10 @@
       <span ion-text class="text-white">ID Cuenta: {{ cuenta.id }}</span>
     </div>
   </div>
+  <ion-card *ngIf="cuentas.length == 0">
+    <ion-card-content style="text-align: center;">
+      ----- No hay cuentas Asociadas -----
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+

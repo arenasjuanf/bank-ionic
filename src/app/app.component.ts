@@ -1,16 +1,14 @@
 import { Component, ViewChild } from "@angular/core";
-import { Platform, Nav } from "ionic-angular";
+import { Platform, Nav, NavController, App } from "ionic-angular";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { DbService } from "../services/db.service";
-import { CheckoutTripPage } from "../pages/checkout-trip/checkout-trip";
 import { TripsPage } from "../pages/trips/trips";
-import { TripDetailPage } from "../pages/trip-detail/trip-detail";
+import { HomePage } from "../pages/home/home";
 
 export interface MenuItem {
     title: string;
@@ -26,32 +24,28 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-
+  userData = {};
   appMenuItems: Array<MenuItem>;
 
   constructor(
+    private app: App,
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public keyboard: Keyboard,
-    private service : DbService
+    public service : DbService
   ) {
+    
     this.initializeApp();
-
     this.appMenuItems = [
-      //{title: 'Home', component: HomePage, icon: 'home'},
       { title: 'Mis Cuentas', component: TripsPage, icon: 'card' },
-      { title: 'CheckoutTripPage', component: CheckoutTripPage, icon: 'card' },
-      { title: 'TripDetailPage', component: TripDetailPage, icon: 'card' },
-
-      /* {title: 'Local Weather', component: LocalWeatherPage, icon: 'partly-sunny'} */
     ];
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
-
+      this.check();
       //*** Control Splash Screen
       // this.splashScreen.show();
       // this.splashScreen.hide();
@@ -65,6 +59,7 @@ export class MyApp {
     });
   }
 
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
@@ -76,6 +71,17 @@ export class MyApp {
     if(this.service.cerrarSesion()){
       this.nav.setRoot(LoginPage);
     }
+  }
+
+  check(){
+    if (this.service.checkearSesion()){
+      //this.nav.setRoot(HomePage);
+      this.navCtrl.setRoot(HomePage);
+    }
+  }
+
+  get navCtrl(): NavController {
+    return this.app.getActiveNav();
   }
 
 }

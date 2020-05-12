@@ -19,25 +19,39 @@ export class TripsPage {
     public tripService: TripService,
     private service: DbService,
     public alert: AlertController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+
   ) {
     // set sample data
     // this.trips = tripService.getAll();
     this.getAccounts();
   }
 
-  getAccounts(){
-    console.log('local storage: ', localStorage);
+  getAccounts(event?){
+    let loader = this.loadingCtrl.create({
+      content: "Cargando Datos"
+    });
+
+    if(!event){
+      loader.present();
+    }
+   
+    
     const idUser = JSON.parse(localStorage.getItem('datosUsuario'));
     this.service.getUserAccounts(idUser['usuario']['id']).subscribe(
       result => {
-        console.log('result: ', result);
         this.cuentas = result['mensaje']
         this.cuentas.forEach(element => {
           element['imgNumber'] = Math.floor(Math.random() * 8) + 1;
         });
+        if(event){
+          event.complete();
+        }
+        loader.dismiss();
       }, error => {
         console.log('error: ', error);
+        loader.dismiss();
       }
     )
   }
@@ -94,6 +108,10 @@ export class TripsPage {
  
     });
     modal.present();
+  }
+
+  doRefresh(event){
+    this.getAccounts(event);
   }
 
 }
