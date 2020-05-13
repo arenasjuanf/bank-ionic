@@ -21,6 +21,24 @@
 <ion-content padding class="animated fadeIn common-bg">
 
 
-  home component
+  <main>
+
+    <!-- Picture and name of encabezado -->
+    <section class="encabezado">
+      <div></div>
+      <h1>{{ service?.dataUser?.nombres }} {{ service?.dataUser?.apellidos }}</h1>
+    </section>
+    <!-- Number of tables to book -->
+    <section class="number-of-tables">
+      <h2>Cantidad de cuentas</h2>
+      <div class="counter">{{cantidad}}</div>
+    </section>
+    <!-- Date and time -->
+    <section class="choose-date">
+      <h2>Fecha Actual</h2>
+      <div>{{fecha}}</div>
+    </section>
+    
+  </main>
 
 </ion-content>

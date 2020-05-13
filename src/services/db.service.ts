@@ -8,13 +8,16 @@ import { App } from "ionic-angular";
 )
 export class DbService {
     urlBase = 'http://127.0.0.1:8000/api/';
-    dataUser = {};
+    dataUser;
     constructor(
         private http: HttpClient,
         public app: App
         //public nav: NavController
     ) {
-        
+        console.log('entra');
+        if (!this.dataUser && localStorage.getItem('datosUsuario')){
+            this.dataUser = JSON.parse(localStorage.getItem('datosUsuario'))['usuario'];
+        }
     }
 
     construirRuta(opcion: string) {

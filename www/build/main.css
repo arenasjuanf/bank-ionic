@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat|Varela|Oswald:400,700';
 .ion-ios-add:before {
   content: "\f102";
 }
@@ -21436,7 +21437,8 @@ ion-navbar.no-border .toolbar-background {
 .auth-page::after {
   content: "";
   background: url("../assets/img/bg.jpg") no-repeat;
-  background-size: cover;
+  background-size: inherit;
+  background-position: center;
   top: 0;
   left: 0;
   bottom: 0;
@@ -21737,6 +21739,167 @@ page-home ion-list .item:last-child,
 page-home ion-list ion-datetime,
 .home ion-list ion-datetime {
   padding-left: 0;
+}
+
+/* Typo */
+/* Main */
+body {
+  background-color: #F4F4F4;
+}
+
+main {
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #F4F4F4;
+  -webkit-box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  background: url("../../assets/img/fondohome.jpg") no-repeat;
+  background-size: cover;
+}
+
+section {
+  width: 315px;
+  margin: 0 auto;
+}
+
+/* Navigation */
+.navigation {
+  margin-top: 40px;
+  overflow: hidden;
+  height: 30px;
+}
+
+.back-to-home {
+  float: left;
+}
+
+.search {
+  float: right;
+}
+
+/* encabezado */
+.encabezado {
+  margin-top: 30px;
+}
+
+.encabezado div:nth-child(1) {
+  width: 95px;
+  height: 95px;
+  margin: 0 auto;
+  border: 6px solid #474850;
+  border-radius: 50%;
+  background: url("../../assets/img/logo_banco.png") no-repeat;
+  background-size: inherit;
+  background-position: center;
+  -webkit-box-shadow: 0 5px 9px 0 rgba(71, 72, 80, 0.5);
+  box-shadow: 0 5px 9px 0 rgba(71, 72, 80, 0.5);
+}
+
+.encabezado h1 {
+  padding: 0;
+  margin: 30px 0 0 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+}
+
+/* Number of tables to book */
+.number-of-tables {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.number-of-tables h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Varela', sans-serif;
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.number-of-tables div {
+  display: inline-block;
+}
+
+.counter {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 72px;
+  margin: 0 60px;
+  color: #ffffff;
+}
+
+.minus, .plus {
+  height: 72px;
+  width: 30px;
+  vertical-align: top;
+  position: relative;
+}
+
+.minus svg, .plus svg {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* Date and time */
+.choose-date {
+  margin-top: 70px;
+}
+
+.choose-date h2, .choose-date div {
+  text-align: center;
+}
+
+.choose-date h2 {
+  font-family: 'Varela', sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.choose-date h2 span {
+  font-family: "Verdana", sans-serif;
+}
+
+.choose-date div {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 20px;
+  word-spacing: 5px;
+  color: #ffffff;
+}
+
+.choose-date div span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+}
+
+/* Confirm */
+.confirm-book {
+  width: 255px;
+  height: 46px;
+  line-height: 46px;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #474850;
+  color: #FFFFFF;
+  -webkit-box-shadow: 0 12px 15px -9px rgba(71, 72, 80, 0.5);
+  box-shadow: 0 12px 15px -9px rgba(71, 72, 80, 0.5);
 }
 
 .logo-modified {
