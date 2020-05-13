@@ -63,6 +63,17 @@ export class LoginPage {
         }
         loader.dismiss();
       }, error => {
+        loader.dismiss();
+
+        let toast = this.toastCtrl.create({
+          message: JSON.stringify(error),
+          duration: 3000,
+          position: 'top',
+          cssClass: 'dark-trans',
+          closeButtonText: 'OK',
+          showCloseButton: true
+        });
+        toast.present();
         console.log('error: ', error);
       }
     )

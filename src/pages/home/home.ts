@@ -14,6 +14,7 @@ export class HomePage {
 
   fecha;
   cantidad = 0;
+  saldo = 0;
   constructor(
     public nav: NavController, 
     public popoverCtrl: PopoverController,
@@ -33,6 +34,7 @@ export class HomePage {
     this.service.getUserAccounts(this.service.dataUser.id).subscribe(
       result => {
         if(result['mensaje']){
+          this.saldo = this.sumarSaldo(result['mensaje']);
           this.cantidad = result['mensaje'].length
         }
         loader.dismiss();
@@ -41,6 +43,14 @@ export class HomePage {
         console.log(error)
       }
     )
+  }
+
+  sumarSaldo(array: any[]){
+    let valor = 0;
+    array.forEach( x => 
+      valor += x.saldo
+    )
+    return valor;
   }
 
   // to go account page
@@ -57,5 +67,3 @@ export class HomePage {
   }
 
 }
-
-//

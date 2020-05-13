@@ -101,6 +101,27 @@ section {
 .number-of-tables div {
   display: inline-block;
 }
+
+// saldo
+
+.saldo {
+  text-align: center;
+  margin-top: 20px;
+}
+.saldo h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Varela', sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+}
+.saldo div {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 30px;
+}
+
+
 .counter {
   font-family: 'Oswald', sans-serif;
   font-weight: 400;

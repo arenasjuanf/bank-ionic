@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.ionicstartheme" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Ionic 3 Start Theme</name>
-    <description>Ionic 3 Start Theme</description>
-    <author email="firminoata@gmail.com" href="https://ionictheme.com">Ionic Theme</author>
+    <name> BancoWD - App </name>
+    <description>BancoWD - App</description>
+    <author email="juanfa107@gmail.com" href="https://ionictheme.com">BancoWD</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
