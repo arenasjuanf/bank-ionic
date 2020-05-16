@@ -7,14 +7,14 @@ import { App } from "ionic-angular";
 @Injectable(
 )
 export class DbService {
-    urlBase = 'http://192.168.1.52:8000/api/';
+    urlBase = 'http://apparqueo.com/BancoMelo/public/api/';
     dataUser;
     constructor(
         private http: HttpClient,
         public app: App
         //public nav: NavController
     ) {
-        console.log('entra');
+        console.log('Servicio On');
         if (!this.dataUser && localStorage.getItem('datosUsuario')){
             this.dataUser = JSON.parse(localStorage.getItem('datosUsuario'))['usuario'];
         }
