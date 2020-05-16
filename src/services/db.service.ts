@@ -7,7 +7,7 @@ import { App } from "ionic-angular";
 @Injectable(
 )
 export class DbService {
-    urlBase = 'http://127.0.0.1:8000/api/';
+    urlBase = 'http://192.168.1.52:8000/api/';
     dataUser;
     constructor(
         private http: HttpClient,

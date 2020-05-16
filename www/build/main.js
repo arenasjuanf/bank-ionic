@@ -873,7 +873,7 @@ var DbService = (function () {
     ) {
         this.http = http;
         this.app = app;
-        this.urlBase = 'http://127.0.0.1:8000/api/';
+        this.urlBase = 'http://192.168.1.52:8000/api/';
         console.log('entra');
         if (!this.dataUser && localStorage.getItem('datosUsuario')) {
             this.dataUser = JSON.parse(localStorage.getItem('datosUsuario'))['usuario'];
@@ -909,12 +909,10 @@ var DbService = (function () {
     };
     DbService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */]
-            //public nav: NavController
-        ])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */]) === "function" && _b || Object])
     ], DbService);
     return DbService;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=db.service.js.map
