@@ -59,7 +59,6 @@ export class HomePage {
   }
 
   presentNotifications(myEvent) {
-    console.log(myEvent);
     let popover = this.popoverCtrl.create(NotificationsPage);
     popover.present({
       ev: myEvent

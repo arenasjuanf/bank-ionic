@@ -24,7 +24,6 @@ export class TripDetailPage {
   ) {
     // set sample data
     this.data = this.navParams.data;
-    console.log('data: ', this.data);
     this.trip = tripService.getItem(1);
   }
 

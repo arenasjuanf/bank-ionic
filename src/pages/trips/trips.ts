@@ -62,7 +62,6 @@ export class TripsPage {
   }
 
   entrarACuenta(cuenta){
-
     let modal = this.alert.create({
       title: 'Ver cuenta' ,
       message: 'Ingresa Clave De La Cuenta ' + cuenta.id,
