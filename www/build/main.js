@@ -182,7 +182,6 @@ var TripsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_db_service__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__trips_trips__ = __webpack_require__(131);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -192,7 +191,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -237,8 +235,8 @@ var CheckoutTripPage = (function () {
                 {
                     text: 'Cerrar',
                     handler: function (data) {
-                        // nada
-                        _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_3__trips_trips__["a" /* TripsPage */]);
+                        //this.nav.setRoot(TripsPage);
+                        _this.nav.pop();
                     }
                 }
             ]
@@ -453,7 +451,6 @@ var TripDetailPage = (function () {
         this.children = 0;
         // set sample data
         this.data = this.navParams.data;
-        console.log('data: ', this.data);
         this.trip = tripService.getItem(1);
     }
     // minus adult when click minus button
@@ -480,11 +477,10 @@ var TripDetailPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-trip-detail',template:/*ion-inline-start:"C:\Users\Hurtatis\Documents\bank-ionic\src\pages\trip-detail\trip-detail.html"*/'<!-- -->\n\n<ion-header>\n\n\n\n  <ion-navbar color="primary">\n\n    <ion-title>\n\n      <span ion-text>{{ data[\'nombre\'] }}</span>\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="common-bg">\n\n  <!--slides-->\n\n  <ion-slides class="to-top" pager>\n\n    <ion-slide>\n\n      <img [src]="\'assets/img/trip/thumb/trip_\'+ data[\'imgNumber\']  +\'.jpg\'" alt="">\n\n    </ion-slide>\n\n  </ion-slides>\n\n\n\n  <!--services-->\n\n  <ion-grid class="border-bottom dark-bg">\n\n    <ion-row>\n\n      <ion-col text-center>\n\n        <div class="text-sm">\n\n          <div>\n\n            <ion-icon name="time" class="text-white"></ion-icon>\n\n            <span ion-text color="light">{{ trip.time }}</span>\n\n\n\n          </div>\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n  <!--high light-->\n\n  <div class="border-bottom" padding>\n\n    <span ion-text color="dark" class="bold">HIGHLIGHT</span>\n\n    <ul class="highlight">\n\n      <li *ngFor="let highlight of trip.highlights">\n\n        <ion-icon name="checkmark" class="text-green"></ion-icon>\n\n        <span ion-text color="primary">{{ highlight }}</span>\n\n      </li>\n\n    </ul>\n\n  </div>\n\n\n\n  <!--booking form-->\n\n  <div class="booking-form card round" margin>\n\n    <div class="border-bottom" padding>\n\n      <h5>{{ trip.sub_name }}</h5>\n\n\n\n      <!--choose guest-->\n\n      <ion-grid class="filters" no-padding margin-top>\n\n        <ion-row>\n\n          <ion-col class="adult" width-70>\n\n            <span ion-text color="primary"><strong>{{ trip.price_adult | currency:\'USD\':true }}</strong> Adults</span>\n\n          </ion-col>\n\n          <ion-col width-10 text-center>\n\n            <ion-icon name="remove-circle" class="text-2x" tappable (click)="minusAdult()" [hidden]="adults < 2"\n\n              color="secondary"></ion-icon>\n\n          </ion-col>\n\n          <ion-col width-10 text-center>{{ adults }}</ion-col>\n\n          <ion-col width-10 text-center>\n\n            <ion-icon name="add-circle" class="text-2x" tappable (click)="plusAdult()" color="secondary"></ion-icon>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row margin-top>\n\n          <ion-col width-70>\n\n            <span ion-text color="primary"><strong>{{ trip.price_child | currency:\'USD\':true }}</strong> Child (0-12\n\n              years)</span>\n\n          </ion-col>\n\n          <ion-col width-10 text-center>\n\n            <ion-icon name="remove-circle" class="text-2x" tappable (click)="minusChildren()" [hidden]="children < 1"\n\n              color="secondary"></ion-icon>\n\n          </ion-col>\n\n          <ion-col width-10 text-center>{{ children }}</ion-col>\n\n          <ion-col width-10 text-center>\n\n            <ion-icon name="add-circle" class="text-2x" tappable (click)="plusChildren()" color="secondary"></ion-icon>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </div>\n\n    <div padding class="form-bottom">\n\n      <!--       <span ion-text color="dark" class="bold">{{ adults }} Adults</span> -->\n\n      <!--booking button-->\n\n      <button ion-button class="pull-right" color="secondary" tappable (click)="checkout()">Book Now {{ adults * trip.price_adult +\n\n        children * trip.price_child | currency:\'USD\':true }}\n\n      </button>\n\n      <div class="clear"></div>\n\n    </div>\n\n  </div>\n\n\n\n  <!--description-->\n\n  <div class="border-bottom" padding>\n\n    <span ion-text color="primary" class="bold">DESCRIPTION</span>\n\n    <p ion-text>{{ trip.description }}</p>\n\n  </div>\n\n\n\n  <!--address-->\n\n  <div class="border-bottom" padding>\n\n    <span ion-text color="primary" class="bold">LOCATION</span>\n\n    <p ion-text>{{ trip.location }}</p>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Hurtatis\Documents\bank-ionic\src\pages\trip-detail\trip-detail.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__services_trip_service__["a" /* TripService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_trip_service__["a" /* TripService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_trip_service__["a" /* TripService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], TripDetailPage);
     return TripDetailPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=trip-detail.js.map
@@ -867,7 +863,9 @@ var DbService = (function () {
     ) {
         this.http = http;
         this.app = app;
-        this.urlBase = 'http://127.0.0.1:8000/api/';
+        //this.urlBase = 'http://127.0.0.1:8000/api/';
+        this.urlBase = 'http://apparqueo.com/BancoMelo/public/api/';
+        console.log('Servicio On');
         if (!this.dataUser && localStorage.getItem('datosUsuario')) {
             this.dataUser = JSON.parse(localStorage.getItem('datosUsuario'))['usuario'];
         }

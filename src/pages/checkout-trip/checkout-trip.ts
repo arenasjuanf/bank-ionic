@@ -53,8 +53,8 @@ export class CheckoutTripPage {
         {
           text: 'Cerrar',
           handler: data => {
-            // nada
-            this.nav.setRoot(TripsPage);
+            //this.nav.setRoot(TripsPage);
+            this.nav.pop();
           }
         }
       ]

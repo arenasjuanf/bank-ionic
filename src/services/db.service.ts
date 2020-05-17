@@ -8,7 +8,8 @@ import { App } from "ionic-angular";
 )
 export class DbService {
 
-    urlBase = 'http://127.0.0.1:8000/api/';
+    //urlBase = 'http://127.0.0.1:8000/api/';
+    urlBase = 'http://apparqueo.com/BancoMelo/public/api/';
     dataUser;
     headers: any;
 
