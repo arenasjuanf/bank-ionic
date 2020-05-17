@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {NavController, PopoverController, LoadingController} from "ionic-angular";
+import { Component } from "@angular/core";
+import { NavController, PopoverController, LoadingController } from "ionic-angular";
 import * as moment from 'moment';
-import {NotificationsPage} from "../notifications/notifications";
-import {SettingsPage} from "../settings/settings";
+import { NotificationsPage } from "../notifications/notifications";
+import { SettingsPage } from "../settings/settings";
 import { DbService } from "../../services/db.service";
 
 @Component({
@@ -15,8 +15,9 @@ export class HomePage {
   fecha;
   cantidad = 0;
   saldo = 0;
+
   constructor(
-    public nav: NavController, 
+    public nav: NavController,
     public popoverCtrl: PopoverController,
     public service: DbService,
     public loadingCtrl: LoadingController
@@ -25,29 +26,26 @@ export class HomePage {
     this.getCuentas();
   }
 
-  getCuentas(){
+  getCuentas() {
     let loader = this.loadingCtrl.create({
       content: "Cargando Datos"
     });
     loader.present();
-
-    this.service.getUserAccounts(this.service.dataUser.id).subscribe(
-      result => {
-        if(result['mensaje']){
-          this.saldo = this.sumarSaldo(result['mensaje']);
-          this.cantidad = result['mensaje'].length
-        }
-        loader.dismiss();
-      }, error => {
-        loader.dismiss();
-        console.log(error)
+    this.service.getUserAccounts(this.service.dataUser.id).subscribe(result => {
+      if (result['mensaje']) {
+        this.saldo = this.sumarSaldo(result['mensaje']);
+        this.cantidad = result['mensaje'].length;
       }
-    )
+      loader.dismiss();
+    }, error => {
+      loader.dismiss();
+      console.log(error)
+    });
   }
 
-  sumarSaldo(array: any[]){
+  sumarSaldo(array: any[]) {
     let valor = 0;
-    array.forEach( x => 
+    array.forEach(x =>
       valor += x.saldo
     )
     return valor;
@@ -59,7 +57,6 @@ export class HomePage {
   }
 
   presentNotifications(myEvent) {
-    console.log(myEvent);
     let popover = this.popoverCtrl.create(NotificationsPage);
     popover.present({
       ev: myEvent

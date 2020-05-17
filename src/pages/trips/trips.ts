@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {NavController, AlertController, ToastController, LoadingController} from "ionic-angular";
-import {TripService} from "../../services/trip-service";
-import {TripDetailPage} from "../trip-detail/trip-detail";
+import { Component } from "@angular/core";
+import { NavController, AlertController, ToastController, LoadingController } from "ionic-angular";
+import { TripService } from "../../services/trip-service";
+import { TripDetailPage } from "../trip-detail/trip-detail";
 import { DbService } from "../../services/db.service";
 import { CheckoutTripPage } from "../checkout-trip/checkout-trip";
 
@@ -12,32 +12,33 @@ import { CheckoutTripPage } from "../checkout-trip/checkout-trip";
 export class TripsPage {
   // list of trips
   public trips: any;
-  cuentas: any = []; 
+  cuentas: any = [];
+  mostrarBotonAtras: boolean = false;
 
   constructor(
-    public nav: NavController, 
+    public nav: NavController,
     public tripService: TripService,
     private service: DbService,
     public alert: AlertController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-
   ) {
     // set sample data
     // this.trips = tripService.getAll();
     this.getAccounts();
   }
 
-  getAccounts(event?){
+  getAccounts(event?) {
     let loader = this.loadingCtrl.create({
       content: "Cargando Datos"
     });
 
-    if(!event){
+    if (!event) {
+      this.mostrarBotonAtras = true;
       loader.present();
     }
-   
-    
+
+
     const idUser = JSON.parse(localStorage.getItem('datosUsuario'));
     this.service.getUserAccounts(idUser['usuario']['id']).subscribe(
       result => {
@@ -45,7 +46,7 @@ export class TripsPage {
         this.cuentas.forEach(element => {
           element['imgNumber'] = Math.floor(Math.random() * 8) + 1;
         });
-        if(event){
+        if (event) {
           event.complete();
         }
         loader.dismiss();
@@ -58,13 +59,12 @@ export class TripsPage {
 
   // view trip detail
   viewDetail(id) {
-    this.nav.push(TripDetailPage, {id: id});
+    this.nav.push(TripDetailPage, { id: id });
   }
 
-  entrarACuenta(cuenta){
-
+  entrarACuenta(cuenta) {
     let modal = this.alert.create({
-      title: 'Ver cuenta' ,
+      title: 'Ver cuenta',
       message: 'Ingresa Clave De La Cuenta ' + cuenta.id,
       inputs: [
         {
@@ -78,18 +78,14 @@ export class TripsPage {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, {
           text: 'Ok',
           handler: () => {
-            
-            if(modal['data']['inputs'][0]['value'] === cuenta.password){
-
+            if (modal['data']['inputs'][0]['value'] === cuenta.password) {
               this.nav.push(CheckoutTripPage, cuenta);
-
-            }else{
-
+            } else {
               let toast = this.toastCtrl.create({
                 message: 'Clave Incorrecta',
                 duration: 2000,
@@ -99,18 +95,15 @@ export class TripsPage {
                 showCloseButton: false
               });
               toast.present();
-
             }
-
           }
         }
       ]
- 
     });
     modal.present();
   }
 
-  doRefresh(event){
+  doRefresh(event) {
     this.getAccounts(event);
   }
 

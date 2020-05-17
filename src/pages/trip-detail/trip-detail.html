@@ -1,9 +1,9 @@
 <!-- -->
 <ion-header>
 
-  <ion-navbar  color="primary">
+  <ion-navbar color="primary">
     <ion-title>
-      <span ion-text>{{ data.nombre }}</span>
+      <span ion-text>{{ data['nombre'] }}</span>
     </ion-title>
   </ion-navbar>
 
@@ -14,7 +14,7 @@
   <!--slides-->
   <ion-slides class="to-top" pager>
     <ion-slide>
-      <img [src]="'assets/img/trip/thumb/trip_'+ data.imgNumber  +'.jpg'" alt="">
+      <img [src]="'assets/img/trip/thumb/trip_'+ data['imgNumber']  +'.jpg'" alt="">
     </ion-slide>
   </ion-slides>
 
@@ -26,7 +26,7 @@
           <div>
             <ion-icon name="time" class="text-white"></ion-icon>
             <span ion-text color="light">{{ trip.time }}</span>
-            
+
           </div>
         </div>
       </ion-col>
@@ -57,7 +57,7 @@
           </ion-col>
           <ion-col width-10 text-center>
             <ion-icon name="remove-circle" class="text-2x" tappable (click)="minusAdult()" [hidden]="adults < 2"
-                      color="secondary"></ion-icon>
+              color="secondary"></ion-icon>
           </ion-col>
           <ion-col width-10 text-center>{{ adults }}</ion-col>
           <ion-col width-10 text-center>
@@ -66,11 +66,12 @@
         </ion-row>
         <ion-row margin-top>
           <ion-col width-70>
-            <span ion-text color="primary"><strong>{{ trip.price_child | currency:'USD':true }}</strong> Child (0-12 years)</span>
+            <span ion-text color="primary"><strong>{{ trip.price_child | currency:'USD':true }}</strong> Child (0-12
+              years)</span>
           </ion-col>
           <ion-col width-10 text-center>
             <ion-icon name="remove-circle" class="text-2x" tappable (click)="minusChildren()" [hidden]="children < 1"
-                      color="secondary"></ion-icon>
+              color="secondary"></ion-icon>
           </ion-col>
           <ion-col width-10 text-center>{{ children }}</ion-col>
           <ion-col width-10 text-center>
@@ -80,7 +81,7 @@
       </ion-grid>
     </div>
     <div padding class="form-bottom">
-<!--       <span ion-text color="dark" class="bold">{{ adults }} Adults</span> -->
+      <!--       <span ion-text color="dark" class="bold">{{ adults }} Adults</span> -->
       <!--booking button-->
       <button ion-button class="pull-right" color="secondary" tappable (click)="checkout()">Book Now {{ adults * trip.price_adult +
         children * trip.price_child | currency:'USD':true }}

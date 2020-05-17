@@ -1,27 +1,23 @@
 <!-- -->
 <ion-header>
-
   <ion-navbar color="primary">
-    <ion-title>{{data?.nombre}}</ion-title>
+    <ion-title>
+      <span ion-text>{{data?.nombre}}</span>
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding class="checkout-trip common-bg">
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <!--trip information-->
   <div class="trip-info card round">
-    <div class="trip-image border-bottom" [ngStyle]="{'background-image': 'url(' + 'assets/img/trip/thumb/trip_'+ data.imgNumber  +'.jpg' + ')'}"></div>
+    <div class="trip-image border-bottom"
+      [ngStyle]="{'background-image': 'url(' + 'assets/img/trip/thumb/trip_'+ data.imgNumber  +'.jpg' + ')'}"></div>
     <ion-grid padding>
       <ion-row>
         <ion-col width-66>
           <h5 ion-text color="primary">{{ data.nombre }}</h5>
           <div>
             <span class="bold">Id Cuenta</span>
-            <br/>
+            <br />
             <span ion-text color="dark">{{ data.id }}</span>
           </div>
         </ion-col>
@@ -32,9 +28,7 @@
       </ion-row>
     </ion-grid>
   </div>
-
   <div class="card round" margin-top margin-bottom>
-
     <div>
       <ion-grid padding>
         <ion-title class="ion-align-items-center">Retirar Monto</ion-title>
@@ -48,9 +42,8 @@
         </ion-row>
       </ion-grid>
     </div>
-
   </div>
-
   <!--submit button-->
-  <button ion-button [disabled]="!monto || monto > data.saldo" class="round" color="primary" margin-top full tappable (click)="generarCodigo()">Generar Codigo de retiro</button>
+  <button ion-button [disabled]="!monto || monto > data.saldo || data.saldo < 1 || monto < 1" class="round" color="primary" margin-top full tappable
+    (click)="generarCodigo()">Generar Codigo de retiro</button>
 </ion-content>

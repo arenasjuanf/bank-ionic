@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 // import { LoginPage } from "../pages/login/login";
 import { App } from "ionic-angular";
 //import { HomePage } from "../pages/home/home";
@@ -7,15 +7,17 @@ import { App } from "ionic-angular";
 @Injectable(
 )
 export class DbService {
+
     urlBase = 'http://127.0.0.1:8000/api/';
     dataUser;
+    headers: any;
+
     constructor(
         private http: HttpClient,
         public app: App
         //public nav: NavController
     ) {
-        console.log('entra');
-        if (!this.dataUser && localStorage.getItem('datosUsuario')){
+        if (!this.dataUser && localStorage.getItem('datosUsuario')) {
             this.dataUser = JSON.parse(localStorage.getItem('datosUsuario'))['usuario'];
         }
     }
@@ -40,17 +42,20 @@ export class DbService {
     cerrarSesion() {
         localStorage.setItem('logged', 'false');
         localStorage.removeItem('datosUsuario');
+        localStorage.clear();
         return true;
-        //this.nav.setRoot(LoginPage);
-        //this.router.navigateByUrl('/login');
     }
 
     getUserAccounts(idUser) {
-        return this.http.get(this.construirRuta('cuentas/listar/' + idUser));
+        this.headers = new HttpHeaders({
+            'Authorization': localStorage.getItem('token'),
+            'tokenTime': localStorage.getItem('tiempoToken')
+        });
+        return this.http.get(this.construirRuta('cuentas/listar/' + idUser), { headers: this.headers });
     }
 
-    crearCodigo(datos){
-        return this.http.post(this.construirRuta('codigo/crear'), datos)
+    crearCodigo(datos) {
+        return this.http.post(this.construirRuta('codigo/crear'), datos, { headers: this.headers });
     }
 
 }
